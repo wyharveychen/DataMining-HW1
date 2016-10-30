@@ -1,0 +1,7 @@
+c,t t ,0
+d, t t,0
+a,tttt,2
+b,tttt,2
+b,tttt,1
+c,t t ,1
+c,t t ,3
