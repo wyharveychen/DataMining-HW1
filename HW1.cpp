@@ -5,6 +5,7 @@ int main(int argc, char* argv[]){
     assert(argc == 2 && "must read one data!");
     TidsetMgr tmgr;
     tmgr.ReadRawInput(argv[1]);
+    tmgr.Eclact();
     return 0;
 }
 

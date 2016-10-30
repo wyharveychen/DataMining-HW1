@@ -1,7 +1,9 @@
-c,t t ,0
-d, t t,0
-a,tttt,2
-b,tttt,2
-b,tttt,1
-c,t t ,1
-c,t t ,3
+a,time,0
+b,time,0
+c,time,0
+d,time,0
+a,time,2
+b,time,2
+c,time,1
+d,time,1
+c,time,3

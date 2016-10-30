@@ -1,35 +1,4 @@
 #include"TidsetMgr.h"
-/*
-void TidsetMgr::ReadInput(char* filename){
-    string line;
-    ifstream fi(filename);
-    vector<int>* tidsetp;
-
-    if(!fi.is_open())
-        exit(EXIT_FAILURE);
-    
-    while(!fi.eof()){
-        getline(fi,line);
-        istringstream nums_str(line);
-        int num = 0;
-        tidsetp = new vector<int>();
-        while( nums_str>>num){
-            tidsetp->push_back(num);
-        }
-        _tidsetp_list.push_back(tidsetp);
-    }
-    if(DEBUG){
-        for(int i = 0; i<_tidsetp_list.size(); i++){
-            tidsetp = _tidsetp_list[i];
-            for(int j = 0; j<tidsetp->size(); j++){
-                printf("%d ",(*tidsetp)[j]);
-            }
-            printf("\n");
-        }
-    }
-    return;
-}
-*/
 void TidsetMgr::ReadRawInput(char* filename){
     string line;
     ifstream fi(filename);
@@ -70,13 +39,6 @@ void TidsetMgr::ReadRawInput(char* filename){
                     num_stream >> item;
                     if(_tidsetp_list.count(item) == 0)            
                         _tidsetp_list.insert(pair<int, vector<int>*>(item, new vector<int>()) );                  
-/*
-                    while(_tidsetp_list.size()<item+1){
-                        _tidsetp_list.push_back(NULL); //initialize until (item+1)th tidset 
-                    }
-                    if(_tidsetp_list[item] == NULL)
-                        _tidsetp_list[item] = new vector<int>(); 
-*/
                     _tidsetp_list[item]->push_back(tid);
                     break;
                 }default:
@@ -100,39 +62,36 @@ void TidsetMgr::ReadRawInput(char* filename){
             printf("\n");
         }
     }
-/*
-    for(int i = 0; i<_tidsetp_list.size(); i++){
-        tidsetp = _tidsetp_list[i];
-        if(tidsetp == NULL)
-            continue;
-        sort(tidsetp->begin(),tidsetp->end());
-    }
-    if(DEBUG){
-        for(int i = 0; i<_tidsetp_list.size(); i++){
-            tidsetp = _tidsetp_list[i];
-            if(tidsetp == NULL)
-                continue;
-            for(int j = 0; j<tidsetp->size(); j++){
-                printf("%d ",(*tidsetp)[j]);
-            }
-            printf("\n");
-        }
-    }
-*/
     return;
 }
 
-void TidsetMgr::Eclact(int depth){
+void TidsetMgr::Eclact(){
+    vector<int>* tidsetp;
 
-}
+    map<int,vector<int>*>  sub_tidsetp_list(_tidsetp_list);   
+    vector<int> prefix;
+    if(DEBUG){
+        for(map<int,vector<int>*>::iterator it = _tidsetp_list.begin(); it != _tidsetp_list.end(); it++ ){
+            printf("{%d} : %d\n",it->first,(int)it->second->size());
+        }
+    }
+    while(sub_tidsetp_list.size() != 0){ 
+        TidsetNode* subnode = new TidsetNode(prefix);
+        _subnodep_list.push_back(subnode);
+        subnode->InitTidset(&sub_tidsetp_list, _minsup, _maxdepth);
+        sub_tidsetp_list.erase(sub_tidsetp_list.begin());
+    }
+   
+}   
 
 void TidsetMgr::IntersectTid(vector<int>* t1, vector<int>* t2, vector<int>* to){
 // assume t1 and t2 are sorted
     int i1 = 0;
     int i2 = 0;
-    while(i1 < t1->size() && i1 <t2->size()){
+    while(i1 < t1->size() && i2 < t2->size()){
         if((*t1)[i1] == (*t2)[i2]){
             to->push_back((*t1)[i1]); //either is OK        
+            i1++; i2++;
         }else if((*t1)[i1] < (*t2)[i2]){
             i1++;
         }else{
