@@ -3,7 +3,7 @@
 #include"TidsetMgr.h"
 
 int main(int argc, char* argv[]){
-    assert(argc == 2 && "must read one data!");
+    assert( (argc == 2 || argc == 3) && "Input format: ./HW1 inputfile [outputfile]");
     TidsetMgr tmgr;
     printf("Reading File...\n");
     tmgr.ReadRawInput(argv[1]);
@@ -18,10 +18,14 @@ int main(int argc, char* argv[]){
             clock_t c_start = clock();        
             tmgr.Eclact(method_list[m_i], sup, max_depth);
             clock_t c_end = clock();        
-            tmgr.PrintResult("result.txt");
             printf("Eclact time: %f s\n", (double)(c_end-c_start)/ CLOCKS_PER_SEC);
         }
-    }
+    }    
+    if(argc == 2)    
+        tmgr.PrintResult();
+    else
+        tmgr.PrintResult(argv[2]);
+    
     return 0;
 }
 

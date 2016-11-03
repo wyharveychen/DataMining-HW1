@@ -149,9 +149,9 @@ bool ItemSupComp(const ItemSup& is1, const ItemSup& is2){
     return is1.second > is2.second; //descend
 }
 
-void TidsetMgr::PrintResult(string filename){
+void TidsetMgr::PrintResult(char* filename){
     sort(_itemsup_list.begin(),_itemsup_list.end(),ItemSupComp);
-    if(filename.compare("") == 0){        
+    if(filename  == NULL){        
         for(int i=0;i<_itemsup_list.size();i++) {
             ItemSup is = _itemsup_list[i];
             for(int j = 0;j<is.first.size();j++){
@@ -161,7 +161,7 @@ void TidsetMgr::PrintResult(string filename){
         }
     }else{
         FILE * fp;
-        fp = fopen(filename.c_str(),"w");
+        fp = fopen(filename,"w");
         for(int i=0;i<_itemsup_list.size();i++) {
             ItemSup is = _itemsup_list[i];
             for(int j = 0;j<is.first.size();j++){

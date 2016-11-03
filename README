@@ -1,0 +1,13 @@
+This work is for National Taiwan University 2016 Fall Data Mining HW1.
+In this work, we implement the Eclact algorithm to mine frequent itemset.
+The algorithm is implemented with both vertical transaction id sets (Tid) and bit sets (Bit).
+
+Input file must has format "userid,timeid,itemid", where userid and timeid compose transaction id. The number of transaction id should not be larger than 3600000.
+
+compile:
+    ./make
+
+run: 
+    ./HW1 inputfile [outputfile]
+
+The execution file will automatically perform both Tid and Bit method under minsup 0.05% ~ 0.01% and show running time. The output file is the sorted frequent itemset with minsup 0.01%. If the output file argument is not given, the result would be shown in command line.
