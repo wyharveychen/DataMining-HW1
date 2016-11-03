@@ -21,7 +21,8 @@ class TidsetNode
 {
 public:
     TidsetNode(IntL prefix){ _prefix = prefix;}
-    ~TidsetNode(){ 
+
+    ~TidsetNode(){     
         for(typename map<int,T*>::iterator it = _subsetp_list.begin(); it != _subsetp_list.end(); ++it ){
             delete it->second;        
         }
@@ -64,9 +65,12 @@ void TidsetNode<T>::RecurEclact(map<int, T* >* setp_listp,  vector<ItemSup>* ite
                     }
                     printf("{%d} : %d\n",item,(int)subsetp->count());
                 #endif
+            }else{
+                delete subsetp;    
             }
         }
     }
+    //delete presetp;
 
     map<int,T*>  subsetp_list(_subsetp_list);
 

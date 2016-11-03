@@ -21,7 +21,14 @@ public:
     TidsetMgr(){ 
         _tid_num = 0;    
     }
-    ~TidsetMgr(){}
+    ~TidsetMgr(){        
+        for(typename map<int,TidS*>::iterator it = _tidsetp_list.begin(); it != _tidsetp_list.end(); ++it ){
+            delete it->second;        
+        }
+        for(typename map<int,BitS*>::iterator it = _bitsetp_list.begin(); it != _bitsetp_list.end(); ++it ){
+            delete it->second;        
+        }
+    }
 
     void ReadRawInput(char* filename);
     void Eclact(string method, float minsupr, int maxdepth);
