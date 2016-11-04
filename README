@@ -8,6 +8,11 @@ compile:
     ./make
 
 run: 
-    ./HW1 inputfile [outputfile]
+    ./HW1 inputfile [outputprefix]
 
-The execution file will automatically perform both Tid and Bit method under minsup 0.05% ~ 0.01% and show running time. The output file is the sorted frequent itemset with minsup 0.01%. If the output file argument is not given, the result would be shown in command line.
+The execution file will automatically perform both Tid and Bit method under minsup 0.05% ~ 0.01% and show running time. The output files are the sorted frequent itemset with filename outputprefix_minsup_method. If the output file prefix argument is not given, the result would be shown in command line.
+
+Recommend usage:
+    mkdir r04921038_result
+    ./HW1 data.txt r04921038_result/out
+
