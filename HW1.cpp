@@ -19,13 +19,16 @@ int main(int argc, char* argv[]){
             tmgr.Eclact(method_list[m_i], sup, max_depth);
             clock_t c_end = clock();        
             printf("Eclact time: %f s\n", (double)(c_end-c_start)/ CLOCKS_PER_SEC);
+            char filename[50];
+            sprintf(filename,"%s_%f_%s.txt",argv[2],sup,method_list[m_i].c_str());         
+            if(argc == 2)    
+                tmgr.PrintResult();
+            else
+                tmgr.PrintResult(filename);
         }
     }    
-    if(argc == 2)    
-        tmgr.PrintResult();
-    else
-        tmgr.PrintResult(argv[2]);
-    
+/*
+*/    
     return 0;
 }
 
